@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>OX — Where bold products compete for the spotlight.</title>
+<meta name="description" content="Back your product, climb the live leaderboard, and get discovered on OX."/>
+<meta name="theme-color" content="#f5f5ed"/>
+<link rel="icon" type="image/x-icon" href="/public/favicon.ico"/>
+<link rel="icon" type="image/svg+xml" href="/public/ox-mark.svg"/>
+<link rel="icon" type="image/png" sizes="32x32" href="/public/favicon-32x32.png"/>
+<link rel="icon" type="image/png" sizes="16x16" href="/public/favicon-16x16.png"/>
+<link rel="apple-touch-icon" sizes="180x180" href="/public/apple-touch-icon.png"/>
+<link rel="manifest" href="/public/manifest.json"/>
+<link rel="canonical" href="https://ox.lol/"/>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="./styles.css"/>
+<style>
+  /* fallback ensure Inter loads */
+  :root{ --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif; }
+  /* hide scrollbar for category pills like original */
+  .no-scrollbar::-webkit-scrollbar{display:none}
+  .no-scrollbar{ -ms-overflow-style:none; scrollbar-width:none }
+</style>
+<script>
+  (()=>{
+    try{
+      const s=localStorage.getItem('ox-theme');
+      const d=s==='dark'||(!s&&matchMedia('(prefers-color-scheme: dark)').matches);
+      document.documentElement.classList.toggle('dark',d);
+      document.documentElement.style.colorScheme=d?'dark':'light'
+    }catch{}
+  })()
+</script>
+</head>
+<body>
+<div class="site-shell min-h-svh overflow-x-hidden bg-background text-foreground">
+  <div class="ambient ambient-left" aria-hidden="true"></div>
+  <div class="ambient ambient-right" aria-hidden="true"></div>
+
+  <!-- Header -->
+  <header class="relative z-20 border-b border-black/5 bg-background/75 backdrop-blur-xl dark:border-white/10">
+    <div class="mx-auto flex h-16 max-w-7xl items-center gap-2 px-4 sm:gap-4 sm:px-6">
+      <a href="#top" class="group flex items-center gap-2.5">
+        <div class="logo-mark grid shrink-0 place-items-center bg-foreground text-background shadow-xl shadow-black/20 transition-transform duration-300 size-10" aria-hidden="true">
+          <svg viewBox="0 0 48 48" class="size-8" fill="none">
+            <circle cx="15" cy="30" r="8" stroke="currentColor" stroke-width="4"></circle>
+            <path d="M24 36 38 18M25 19 38 36" stroke="currentColor" stroke-width="4" stroke-linecap="round"></path>
+            <path d="M31 16h9v9" stroke="var(--primary)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"></path>
+            <circle cx="10" cy="13" r="2" fill="var(--primary)"></circle>
+            <circle cx="17" cy="11" r="2" fill="var(--primary)" opacity=".65"></circle>
+          </svg>
+        </div>
+        <span class="brand-wordmark" aria-label="ox.lol">
+          <span class="brand-ox" aria-hidden="true">ox</span>
+          <span class="brand-dot" aria-hidden="true"></span>
+          <span class="brand-lol" aria-hidden="true"><span>l</span><span class="brand-ring"></span><span>l</span></span>
+        </span>
+      </a>
+
+      <div class="flex items-center rounded-full border border-black/5 bg-white/55 p-1 shadow-sm dark:border-white/10 dark:bg-white/5">
+        <a href="/" aria-current="page" class="inline-flex h-6 items-center gap-1 rounded-full bg-primary px-2.5 text-xs font-medium text-primary-foreground"> <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 14.66V17a1 1 0 0 1-1 1 2 2 0 0 0-2 2v2"/><path d="M14 14.66V17a1 1 0 0 0 1 1 2 2 0 0 1 2 2v2"/><path d="M17.916 10H19.5A2.5 2.5 0 0 0 22 7.5V5a1 1 0 0 0-1-1h-3"/><path d="M4 22h16"/><path d="M6 9a6 6 0 0 0 12 0V3a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1z"/><path d="M6.084 10H4.5A2.5 2.5 0 0 1 2 7.5V5a1 1 0 0 1 1-1h3"/></svg> All-time</a>
+        <a href="#today" class="inline-flex h-6 items-center rounded-full px-2.5 text-xs font-medium hover:bg-muted">Today</a>
+      </div>
+
+      <nav class="ml-auto hidden items-center gap-6 text-sm text-muted-foreground md:flex">
+        <a href="#leaderboard" class="font-medium text-foreground">Leaderboard</a>
+        <a href="#categories" class="hover:text-foreground">Categories</a>
+        <a href="#calendar" class="hover:text-foreground">Calendar</a>
+        <a href="#games" class="hover:text-foreground">Games</a>
+        <a href="#about" class="hover:text-foreground">About</a>
+        <a href="#rules" class="hover:text-foreground">Rules</a>
+      </nav>
+
+      <button id="theme-toggle" type="button" aria-label="Switch to dark mode" title="Dark mode" class="ml-auto grid size-8 place-items-center rounded-full hover:bg-muted md:ml-0">
+        <svg class="lucide-moon size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401"/></svg>
+      </button>
+
+      <!-- mobile menu -->
+      <button id="mobile-menu-btn" class="grid size-8 place-items-center rounded-full border border-black/10 bg-white/60 dark:border-white/10 dark:bg-white/5 md:hidden">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+      </button>
+    </div>
+    <div id="mobile-nav" class="hidden border-t border-black/5 bg-background px-4 py-3 dark:border-white/10 md:hidden">
+      <nav class="flex flex-col gap-3 text-sm">
+        <a href="#leaderboard" class="font-medium">Leaderboard</a>
+        <a href="#categories" class="text-muted-foreground">Categories</a>
+        <a href="#calendar" class="text-muted-foreground">Calendar</a>
+        <a href="#games" class="text-muted-foreground">Games</a>
+        <a href="#about" class="text-muted-foreground">About</a>
+        <a href="#rules" class="text-muted-foreground">Rules</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top" class="relative z-10">
+    <section class="mx-auto max-w-7xl px-4 pt-12 pb-20 sm:px-6 sm:pt-16">
+      <!-- hero -->
+      <div class="mx-auto max-w-4xl text-center">
+        <span data-slot="badge" class="mb-7 inline-flex items-center gap-1 rounded-full border border-black/5 bg-white/60 px-4 py-2 text-xs font-medium text-muted-foreground shadow-sm backdrop-blur dark:border-white/10 dark:bg-white/5">
+          <span class="live-dot mr-2 size-2 rounded-full bg-emerald-500"></span>
+          <strong class="mr-1 text-emerald-600"><span id="online-count">1,284</span> online across OX</strong> · <span id="visitor-count">48,392</span> visitors since launch
+        </span>
+
+        <div class="hero-tape mx-auto mb-5 w-fit -rotate-2 bg-foreground px-4 py-2 text-[10px] font-black tracking-[0.2em] text-background uppercase shadow-[5px_5px_0_var(--primary)]">Where bold products compete for the spotlight</div>
+
+        <h1 class="text-[clamp(2.8rem,6.5vw,5.9rem)] leading-[0.92] font-semibold tracking-[-0.075em] text-balance">
+          Built different? <span class="block sm:mt-2">Claim #1 for
+            <span class="headline-price-control">
+              <button id="price-minus" type="button" aria-label="Decrease headline bid by one dollar" class="headline-price-button grid place-items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14"/></svg>
+              </button>
+              <span class="headline-price" id="headline-price">$17</span>
+              <button id="price-plus" type="button" aria-label="Increase headline bid by one dollar" class="headline-price-button grid place-items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
+              </button>
+            </span>
+          </span>
+        </h1>
+
+        <p class="mx-auto mt-6 max-w-2xl text-base leading-relaxed text-balance text-muted-foreground sm:text-lg">
+          Back your product, climb the live leaderboard, and get discovered. The crown sits at <strong class="text-foreground" id="crown-price">$12</strong>. Beat it. Take it. Make some noise.
+        </p>
+      </div>
+
+      <!-- bid panel -->
+      <div class="bid-panel mx-auto mt-9 max-w-4xl overflow-visible rounded-2xl border-0 bg-white/80 py-3 shadow-[0_24px_80px_-38px_rgba(25,35,15,.35)] ring-1 ring-black/5 backdrop-blur-xl dark:bg-card/90 dark:ring-white/10" id="place-bid">
+        <div class="grid gap-2 px-3 sm:grid-cols-[minmax(0,1fr)_auto]">
+          <div class="grid min-w-0 grid-cols-[minmax(0,1fr)_minmax(130px,38%)] overflow-hidden rounded-xl bg-secondary/70 sm:grid-cols-[minmax(0,1fr)_220px]">
+            <div class="relative min-w-0">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="absolute top-1/2 left-4 z-10 size-4 -translate-y-1/2 text-muted-foreground"><path d="M21.54 15H17a2 2 0 0 0-2 2v4.54"/><path d="M7 3.34V5a3 3 0 0 0 3 3a2 2 0 0 1 2 2c0 1.1.9 2 2 2a2 2 0 0 0 2-2c0-1.1.9-2 2-2h3.17"/><path d="M11 21.95V18a2 2 0 0 0-2-2a2 2 0 0 1-2-2v-1a2 2 0 0 0-2-2H2.05"/><circle cx="12" cy="12" r="10"/></svg>
+              <input id="product-url" type="url" placeholder="Your product URL" class="h-13 w-full min-w-0 border-0 bg-transparent pl-11 pr-3 text-sm placeholder:text-muted-foreground focus:outline-none md:text-sm" autocomplete="off"/>
+            </div>
+            <div class="relative">
+              <select id="category-select" class="h-13 w-full appearance-none border-y-0 border-r-0 border-l border-border/70 bg-transparent px-4 text-sm focus:outline-none">
+                <option value="" disabled selected>Choose category</option>
+                <option>Agents</option>
+                <option>AI Media</option>
+                <option>Marketing</option>
+                <option>Developer</option>
+                <option>SEO</option>
+                <option>Social</option>
+                <option>Productivity</option>
+                <option>Health</option>
+                <option>Games</option>
+                <option>Profiles</option>
+                <option>Blogs</option>
+                <option>Other</option>
+              </select>
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground"><path d="m6 9 6 6 6-6"/></svg>
+            </div>
+          </div>
+          <button id="submit-bid" type="button" class="inline-flex h-13 items-center justify-center gap-1.5 rounded-xl bg-primary px-7 text-sm font-medium text-primary-foreground shadow-lg shadow-primary/15 transition disabled:opacity-50" disabled>OX Bid <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></button>
+        </div>
+      </div>
+      <div class="mt-4 text-center text-xs text-muted-foreground">
+        <span class="inline-flex items-center gap-1.5"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="size-3.5 text-primary"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg> Whole-dollar bids only · Pick any whole-dollar total up to the leader · taking #1 requires +$5 · Secure checkout by Dodo Payments</span>
+      </div>
+
+      <!-- leaderboard -->
+      <section id="leaderboard" class="mx-auto mt-16 max-w-6xl scroll-mt-24">
+        <div class="mb-5 flex flex-col gap-5">
+          <div class="flex items-end justify-between gap-4">
+            <div>
+              <p class="mb-1 text-xs font-semibold tracking-[0.17em] text-primary uppercase">Live leaderboard</p>
+              <h2 class="text-3xl font-semibold tracking-[-0.05em] sm:text-4xl">Compete. Rank. Get discovered.</h2>
+            </div>
+            <div class="hidden items-center gap-2 text-xs text-muted-foreground sm:flex"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><path d="M16 3.128a4 4 0 0 1 0 7.744"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><circle cx="9" cy="7" r="4"/></svg> Synced live</div>
+          </div>
+
+          <div id="categories" class="no-scrollbar flex gap-1 overflow-x-auto pb-1">
+            <!-- injected by JS -->
+          </div>
+        </div>
+
+        <div class="front-row-banner mb-4 flex rotate-[-0.35deg] flex-col gap-2 border-y-2 border-foreground bg-primary px-4 py-3 text-primary-foreground shadow-[6px_6px_0_var(--foreground)] sm:flex-row sm:items-center sm:justify-between sm:px-6">
+          <span class="text-xs font-black tracking-[0.18em] uppercase">The front row · top 3</span>
+          <span class="text-xs font-semibold">World-changing products don't wait for permission.</span>
+          <span class="text-xs font-black tracking-[0.12em] uppercase">Ready for the spotlight? Claim it →</span>
+        </div>
+
+        <div class="rank-stage space-y-4" id="rank-stage">
+          <!-- rank 1 -->
+          <article class="top-listing group relative rounded-3xl border bg-white transition-all duration-300 hover:-translate-y-0.5 dark:bg-card rank-one min-h-52 border-primary/45 shadow-[0_35px_90px_-42px_rgba(79,102,30,.55)]" data-category="AI Media">
+            <button type="button" class="claim-btn absolute top-0 left-1/2 z-30 inline-flex -translate-x-1/2 -translate-y-1/2 items-center gap-1 rounded-full bg-primary px-3 py-1.5 text-[11px] font-medium text-primary-foreground shadow-[0_10px_30px_-8px_rgba(0,0,0,.4)] transition-all duration-200 sm:pointer-events-none sm:opacity-0 sm:group-hover:pointer-events-auto sm:group-hover:-translate-y-[60%] sm:group-hover:opacity-100 sm:px-5 sm:text-sm">
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="fill-current"><path d="M11.562 3.266a.5.5 0 0 1 .876 0L15.39 8.87a1 1 0 0 0 1.516.294L21.183 5.5a.5.5 0 0 1 .798.519l-2.834 10.246a1 1 0 0 1-.956.734H5.81a1 1 0 0 1-.957-.734L2.02 6.02a.5.5 0 0 1 .798-.519l4.276 3.664a1 1 0 0 0 1.516-.294z"/><path d="M5 21h14"/></svg>
+              Claim #1 for $17
+            </button>
+            <div class="grid items-stretch overflow-hidden rounded-3xl sm:min-h-56 sm:grid-cols-[minmax(0,1fr)_18rem]">
+              <div class="rank-one-copy relative isolate flex flex-col overflow-hidden bg-white p-5 sm:min-h-56 sm:p-7 dark:bg-card">
+                <span aria-hidden="true" class="pointer-events-none absolute right-3 -top-8 -z-10 text-[8rem] font-black tracking-[-0.12em] text-primary/[0.065] dark:text-primary/[0.09]">01</span>
+                <div class="relative flex items-center gap-2">
+                  <span class="inline-flex items-center gap-1.5 rounded-full bg-amber-300 px-3 py-1 text-xs font-medium text-amber-950 shadow-sm"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="fill-current"><path d="M11.562 3.266a.5.5 0 0 1 .876 0L15.39 8.87a1 1 0 0 0 1.516.294L21.183 5.5a.5.5 0 0 1 .798.519l-2.834 10.246a1 1 0 0 1-.956.734H5.81a1 1 0 0 1-.957-.734L2.02 6.02a.5.5 0 0 1 .798-.519l4.276 3.664a1 1 0 0 0 1.516-.294z"/><path d="M5 21h14"/></svg>Champion</span>
+                  <span class="ml-auto inline-flex items-center gap-1.5 rounded-full border border-primary/25 bg-primary/10 px-3 py-1 text-xs font-bold tracking-[0.08em] uppercase text-primary"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 14.66V17a1 1 0 0 1-1 1 2 2 0 0 0-2 2v2"/><path d="M14 14.66V17a1 1 0 0 0 1 1 2 2 0 0 1 2 2v2"/><path d="M17.916 10H19.5A2.5 2.5 0 0 0 22 7.5V5a1 1 0 0 0-1-1h-3"/><path d="M4 22h16"/><path d="M6 9a6 6 0 0 0 12 0V3a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1z"/><path d="M6.084 10H4.5A2.5 2.5 0 0 1 2 7.5V5a1 1 0 0 1 1-1h3"/></svg> #1</span>
+                </div>
+                <div class="relative flex flex-1 items-center gap-4 py-7 sm:gap-5 sm:py-8">
+                  <div class="relative shrink-0">
+                    <span aria-hidden="true" class="absolute -inset-2 rotate-6 rounded-[1.35rem] border border-primary/25 bg-primary/10"></span>
+                    <div class="relative grid size-14 place-items-center overflow-hidden rounded-2xl bg-gradient-to-br from-violet-500 to-indigo-700 text-base font-semibold text-white shadow-sm sm:size-18">GA</div>
+                  </div>
+                  <div class="min-w-0 flex-1">
+                    <p class="mb-1 text-[10px] font-semibold tracking-[0.16em] uppercase text-primary">Current leader</p>
+                    <h3 class="truncate text-2xl font-semibold tracking-[-0.045em] sm:text-3xl"><a href="#" class="hover:text-primary hover:underline hover:decoration-2 hover:underline-offset-4">Global AI News & Intelligence · QOK.ai</a></h3>
+                    <p class="mt-1 line-clamp-2 max-w-3xl text-sm leading-relaxed text-muted-foreground sm:text-base">Real-time global AI news curated, verified and summarized by intelligent agents.</p>
+                    <div class="mt-3 flex flex-wrap gap-2 text-[11px] text-muted-foreground">
+                      <a href="#" class="rounded-full border border-border/70 bg-muted/55 px-2.5 py-1 hover:border-primary/35 hover:text-foreground">qok.ai</a>
+                      <span class="rounded-full border border-border/70 bg-muted/55 px-2.5 py-1">AI Media</span>
+                      <strong class="rounded-full border border-border/70 bg-muted/55 px-2.5 py-1 font-semibold text-foreground">37 clicks</strong>
+                    </div>
+                  </div>
+                </div>
+                <a href="#" class="group/bid mt-5 flex items-end justify-between rounded-2xl border border-primary/15 bg-primary/7 p-4 hover:bg-primary/12 sm:hidden">
+                  <div><p class="text-[10px] font-semibold tracking-[0.16em] text-muted-foreground uppercase">Winning bid</p><p class="text-3xl font-semibold tracking-[-0.06em] tabular-nums">$12</p></div>
+                  <span class="grid size-9 place-items-center rounded-full border border-foreground/15 bg-white/60 group-hover/bid:rotate-12 group-hover/bid:scale-105"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></span>
+                </a>
+              </div>
+              <div class="rank-one-art relative hidden min-h-56 items-end overflow-hidden border-l border-black/5 p-5 sm:flex dark:border-white/10">
+                <div class="art-orbit art-orbit-one"></div>
+                <div class="art-orbit art-orbit-two"></div>
+                <a href="#" class="group/bid relative w-full rounded-2xl border border-white/35 bg-white/70 p-5 shadow-xl backdrop-blur-xl hover:-translate-y-0.5 transition-transform">
+                  <p class="text-[10px] font-semibold tracking-[0.16em] text-muted-foreground uppercase">Winning bid</p>
+                  <div class="mt-1 flex items-end justify-between gap-3 text-neutral-950">
+                    <p class="text-4xl font-semibold tracking-[-0.06em] tabular-nums">$12</p>
+                    <span class="grid size-10 place-items-center rounded-full border border-neutral-950/15 bg-white/50 group-hover/bid:rotate-12 group-hover/bid:scale-105"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></span>
+                  </div>
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <!-- rank 2 -->
+          <article class="top-listing group relative rounded-3xl border bg-white transition-all duration-300 hover:-translate-y-0.5 dark:bg-card rank-contender rank-two border-orange-400/45 dark:border-orange-300/20" data-category="Marketing">
+            <button type="button" class="claim-btn absolute top-0 left-1/2 z-30 inline-flex -translate-x-1/2 -translate-y-1/2 items-center gap-1 rounded-full bg-primary px-3 py-1.5 text-[11px] font-medium text-primary-foreground shadow-[0_10px_30px_-8px_rgba(0,0,0,.4)] transition-all duration-200 sm:pointer-events-none sm:opacity-0 sm:group-hover:pointer-events-auto sm:group-hover:-translate-y-[60%] sm:group-hover:opacity-100 sm:px-5 sm:text-sm">
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="fill-current"><path d="M11.562 3.266a.5.5 0 0 1 .876 0L15.39 8.87a1 1 0 0 0 1.516.294L21.183 5.5a.5.5 0 0 1 .798.519l-2.834 10.246a1 1 0 0 1-.956.734H5.81a1 1 0 0 1-.957-.734L2.02 6.02a.5.5 0 0 1 .798-.519l4.276 3.664a1 1 0 0 0 1.516-.294z"/><path d="M5 21h14"/></svg>
+              Claim #2 for $8
+            </button>
+            <div class="relative grid min-h-36 grid-cols-[auto_minmax(0,1fr)_auto] items-center gap-3 overflow-hidden rounded-3xl p-3 sm:min-h-44 sm:gap-6 sm:px-7 sm:py-5">
+              <div class="rank-poster relative z-10 grid h-20 w-14 shrink-0 place-content-center border-2 text-center sm:h-28 sm:w-20 rank-poster-bronze border-orange-800 text-orange-950">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="mx-auto mb-1"><path d="M10 14.66V17a1 1 0 0 1-1 1 2 2 0 0 0-2 2v2"/><path d="M14 14.66V17a1 1 0 0 0 1 1 2 2 0 0 1 2 2v2"/><path d="M17.916 10H19.5A2.5 2.5 0 0 0 22 7.5V5a1 1 0 0 0-1-1h-3"/><path d="M4 22h16"/><path d="M6 9a6 6 0 0 0 12 0V3a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1z"/><path d="M6.084 10H4.5A2.5 2.5 0 0 1 2 7.5V5a1 1 0 0 1 1-1h3"/></svg>
+                <span class="text-2xl leading-none font-black tracking-[-0.08em] sm:text-4xl">02</span>
+                <span class="mt-2 text-[8px] font-black tracking-[0.16em] uppercase sm:text-[9px]">Second</span>
+              </div>
+              <div class="relative z-10 flex min-w-0 items-center gap-2 sm:gap-4">
+                <div class="grid size-14 shrink-0 place-items-center overflow-hidden rounded-2xl bg-gradient-to-br from-cyan-400 to-blue-600 text-white font-semibold shadow-sm sm:size-18">A|</div>
+                <div class="min-w-0">
+                  <div class="mb-1 flex items-center gap-2"><span class="text-[9px] font-black tracking-[0.16em] uppercase text-neutral-600 dark:text-neutral-300">Chasing #1</span></div>
+                  <h3 class="truncate text-base font-bold tracking-[-0.035em] sm:text-xl"><a href="#" class="hover:text-primary hover:underline">AdsPals | Rent their reach</a></h3>
+                  <p class="line-clamp-1 text-xs text-muted-foreground sm:text-sm">Sponsor posts on X, at a fixed price. Sell or buy posts.</p>
+                  <div class="mt-2 hidden flex-wrap gap-x-3 text-[11px] text-muted-foreground sm:flex"><span>adspals.com</span><span>Marketing</span><strong class="text-foreground">52 clicks</strong></div>
+                </div>
+              </div>
+              <div class="relative z-10 min-w-12 text-right sm:min-w-24">
+                <p class="text-[9px] font-black tracking-[0.14em] text-muted-foreground uppercase">Bid</p>
+                <p class="text-2xl font-black tracking-[-0.06em] tabular-nums sm:text-3xl">$7</p>
+                <a href="#" class="mt-2 ml-auto hidden size-8 items-center justify-center rounded-full border border-foreground/15 bg-white/60 group-hover:rotate-12 group-hover:scale-110 sm:inline-flex dark:bg-white/8"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></a>
+              </div>
+            </div>
+          </article>
+
+          <!-- rank 3 -->
+          <article class="top-listing group relative rounded-3xl border bg-white transition-all duration-300 hover:-translate-y-0.5 dark:bg-card rank-contender rank-three border-neutral-400/45 dark:border-white/15" data-category="Marketing">
+            <button type="button" class="claim-btn absolute top-0 left-1/2 z-30 inline-flex -translate-x-1/2 -translate-y-1/2 items-center gap-1 rounded-full bg-primary px-3 py-1.5 text-[11px] font-medium text-primary-foreground shadow-[0_10px_30px_-8px_rgba(0,0,0,.4)] transition-all duration-200 sm:pointer-events-none sm:opacity-0 sm:group-hover:pointer-events-auto sm:group-hover:-translate-y-[60%] sm:group-hover:opacity-100 sm:px-5 sm:text-sm">
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="fill-current"><path d="M11.562 3.266a.5.5 0 0 1 .876 0L15.39 8.87a1 1 0 0 0 1.516.294L21.183 5.5a.5.5 0 0 1 .798.519l-2.834 10.246a1 1 0 0 1-.956.734H5.81a1 1 0 0 1-.957-.734L2.02 6.02a.5.5 0 0 1 .798-.519l4.276 3.664a1 1 0 0 0 1.516-.294z"/><path d="M5 21h14"/></svg>
+              Claim #3 for $3
+            </button>
+            <div class="relative grid min-h-36 grid-cols-[auto_minmax(0,1fr)_auto] items-center gap-3 overflow-hidden rounded-3xl p-3 sm:min-h-44 sm:gap-6 sm:px-7 sm:py-5">
+              <div class="rank-poster relative z-10 grid h-20 w-14 shrink-0 place-content-center border-2 text-center sm:h-28 sm:w-20 rank-poster-silver border-neutral-500 text-neutral-950">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="mx-auto mb-1"><path d="M10 14.66V17a1 1 0 0 1-1 1 2 2 0 0 0-2 2v2"/><path d="M14 14.66V17a1 1 0 0 0 1 1 2 2 0 0 1 2 2v2"/><path d="M17.916 10H19.5A2.5 2.5 0 0 0 22 7.5V5a1 1 0 0 0-1-1h-3"/><path d="M4 22h16"/><path d="M6 9a6 6 0 0 0 12 0V3a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1z"/><path d="M6.084 10H4.5A2.5 2.5 0 0 1 2 7.5V5a1 1 0 0 1 1-1h3"/></svg>
+                <span class="text-2xl leading-none font-black tracking-[-0.08em] sm:text-4xl">03</span>
+                <span class="mt-2 text-[8px] font-black tracking-[0.16em] uppercase sm:text-[9px]">Third place</span>
+              </div>
+              <div class="relative z-10 flex min-w-0 items-center gap-2 sm:gap-4">
+                <div class="grid size-14 shrink-0 place-items-center overflow-hidden rounded-2xl bg-gradient-to-br from-orange-300 to-rose-500 text-white font-semibold shadow-sm sm:size-18">L</div>
+                <div class="min-w-0">
+                  <div class="mb-1 flex items-center gap-2"><span class="text-[9px] font-black tracking-[0.16em] uppercase text-neutral-600 dark:text-neutral-300">On the podium</span></div>
+                  <h3 class="truncate text-base font-bold tracking-[-0.035em] sm:text-xl"><a href="#" class="hover:text-primary hover:underline">Lolrouter</a></h3>
+                  <p class="line-clamp-1 text-xs text-muted-foreground sm:text-sm">Discover lolrouter.lol on OX.</p>
+                  <div class="mt-2 hidden flex-wrap gap-x-3 text-[11px] text-muted-foreground sm:flex"><span>lolrouter.lol</span><span>Marketing</span><strong class="text-foreground">54 clicks</strong></div>
+                </div>
+              </div>
+              <div class="relative z-10 min-w-12 text-right sm:min-w-24">
+                <p class="text-[9px] font-black tracking-[0.14em] text-muted-foreground uppercase">Bid</p>
+                <p class="text-2xl font-black tracking-[-0.06em] tabular-nums sm:text-3xl">$2</p>
+                <a href="#" class="mt-2 ml-auto hidden size-8 items-center justify-center rounded-full border border-foreground/15 bg-white/60 group-hover:rotate-12 group-hover:scale-110 sm:inline-flex dark:bg-white/8"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></a>
+              </div>
+            </div>
+          </article>
+
+          <div class="flex items-center gap-3 py-3">
+            <div class="h-px flex-1 bg-border"></div>
+            <span class="text-[10px] font-semibold tracking-[0.18em] text-muted-foreground uppercase">Everybody else · come take it</span>
+            <div class="h-px flex-1 bg-border"></div>
+          </div>
+
+          <div class="chase-pack space-y-2 rounded-3xl border border-black/5 bg-white/40 p-2 backdrop-blur-sm dark:border-white/10 dark:bg-white/3" id="chase-pack">
+            <!-- rows injected by JS -->
+          </div>
+
+          <div class="mt-6 flex items-center gap-3 py-3">
+            <div class="h-px flex-1 bg-border"></div>
+            <span class="text-[10px] font-semibold tracking-[0.18em] text-muted-foreground uppercase">More products on the board</span>
+            <div class="h-px flex-1 bg-border"></div>
+          </div>
+
+          <div class="space-y-2 rounded-3xl border border-black/5 bg-white/40 p-2 backdrop-blur-sm dark:border-white/10 dark:bg-white/3" id="more-pack">
+            <!-- more rows -->
+          </div>
+        </div>
+
+        <!-- bottom grid -->
+        <div class="mt-6 grid gap-6 lg:grid-cols-3">
+          <section class="rounded-3xl border border-black/5 bg-white/55 p-5 shadow-sm backdrop-blur-sm dark:border-white/10 dark:bg-white/5 lg:col-span-3">
+            <div class="mb-4 flex items-center justify-between">
+              <h3 class="flex items-center gap-2 text-sm font-semibold"><span class="size-2 rounded-full bg-primary"></span> Latest activity</h3>
+              <span class="text-xs text-muted-foreground">Live</span>
+            </div>
+            <div class="grid gap-2 sm:grid-cols-2 lg:grid-cols-4" id="activity-grid">
+              <!-- injected -->
+            </div>
+          </section>
+        </div>
+
+        <!-- Calendar board -->
+        <section id="calendar" aria-labelledby="calendar-board-preview-title" class="mt-6 w-full overflow-hidden rounded-3xl border border-border/70 bg-card/80 shadow-sm backdrop-blur">
+          <div class="flex flex-col gap-3 border-b border-border/60 p-4 sm:flex-row sm:items-center sm:justify-between sm:px-5 sm:py-4">
+            <div>
+              <div class="mb-1 flex items-center gap-2 text-[10px] font-bold tracking-[0.16em] uppercase text-primary"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 2v3"/><path d="M16 2v3"/><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M8 13h.01"/><path d="M12 13h.01"/><path d="M16 13h.01"/><path d="M8 17h.01"/><path d="M12 17h.01"/><path d="M16 17h.01"/></svg> Paid product history</div>
+              <h2 id="calendar-board-preview-title" class="text-xl font-semibold tracking-[-0.045em] sm:text-2xl">Calendar board</h2>
+              <p class="mt-1 text-xs text-muted-foreground">Every day has a champion. Hover or tap to reveal the top 10.</p>
+            </div>
+            <a href="#" class="inline-flex h-8 items-center gap-1 rounded-full border border-border bg-white px-3 text-sm font-medium hover:bg-muted self-start sm:self-auto">Open calendar <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
+          </div>
+          <div class="p-2 sm:px-4 sm:py-3">
+            <div class="mb-3 flex items-center justify-between">
+              <button id="cal-prev" class="grid size-8 place-items-center rounded-full hover:bg-muted"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m15 18-6-6 6-6"/></svg></button>
+              <span id="cal-title" class="text-sm font-semibold">September 2026</span>
+              <button id="cal-next" class="grid size-8 place-items-center rounded-full hover:bg-muted"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg></button>
+            </div>
+            <div class="grid grid-cols-7 gap-1 text-center text-[10px] font-semibold tracking-widest text-muted-foreground uppercase">
+              <span>Su</span><span>Mo</span><span>Tu</span><span>We</span><span>Th</span><span>Fr</span><span>Sa</span>
+            </div>
+            <div id="cal-grid" class="mt-2 grid grid-cols-7 gap-1.5">
+              <!-- injected -->
+            </div>
+          </div>
+        </section>
+      </section>
+    </section>
+  </main>
+
+  <footer id="about" class="relative z-10 border-t border-black/5 bg-white/35 dark:border-white/10 dark:bg-white/3">
+    <div class="mx-auto flex max-w-7xl flex-col gap-5 px-4 py-8 text-sm text-muted-foreground sm:px-6 md:flex-row md:items-center">
+      <div class="flex items-center gap-2 font-semibold text-foreground">
+        <div class="logo-mark grid shrink-0 place-items-center bg-foreground text-background shadow-xl shadow-black/20 size-7" aria-hidden="true">
+          <svg viewBox="0 0 48 48" class="size-5" fill="none">
+            <circle cx="15" cy="30" r="8" stroke="currentColor" stroke-width="4"></circle>
+            <path d="M24 36 38 18M25 19 38 36" stroke="currentColor" stroke-width="4" stroke-linecap="round"></path>
+            <path d="M31 16h9v9" stroke="var(--primary)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"></path>
+            <circle cx="10" cy="13" r="2" fill="var(--primary)"></circle>
+            <circle cx="17" cy="11" r="2" fill="var(--primary)" opacity=".65"></circle>
+          </svg>
+        </div>
+        <span class="brand-wordmark brand-wordmark-compact" aria-label="ox.lol"><span class="brand-ox">ox</span><span class="brand-dot"></span><span class="brand-lol"><span>l</span><span class="brand-ring"></span><span>l</span></span></span>
+      </div>
+      <p class="md:ml-4">Built something great? Put it on the board.</p>
+      <nav class="flex flex-wrap gap-5 md:ml-auto">
+        <a href="#" class="hover:text-foreground">China Rank</a>
+        <a href="#" class="hover:text-foreground">Games</a>
+        <a href="#" class="hover:text-foreground">Privacy</a>
+        <a href="https://x.com/qok_ai" target="_blank" class="flex items-center gap-1 hover:text-foreground">X / Twitter <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6"/><path d="M10 14 21 3"/><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/></svg></a>
+        <a href="#" class="hover:text-foreground">Terms</a>
+        <a href="#" class="hover:text-foreground">Rules</a>
+      </nav>
+    </div>
+  </footer>
+</div>
+
+<!-- Bid dialog -->
+<dialog id="bid-dialog" class="m-0 max-h-none max-w-none w-full max-w-[560px] overflow-visible rounded-3xl bg-transparent p-4 backdrop:bg-black/60 open:grid place-items-center inset-0 mx-auto my-auto">
+  <form method="dialog" class="w-full rounded-3xl bg-card p-6 shadow-2xl">
+    <div class="mb-4 flex items-start justify-between">
+      <div>
+        <p class="text-xs font-bold tracking-widest text-primary uppercase">Secure checkout</p>
+        <h3 class="mt-1 text-xl font-semibold">Claim your spot</h3>
+        <p class="mt-1 text-sm text-muted-foreground" id="dialog-subtitle">You're about to claim #1 for $17 and take the crown.</p>
+      </div>
+      <button type="submit" value="cancel" class="grid size-8 place-items-center rounded-full hover:bg-muted"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
+    </div>
+    <div class="rounded-2xl bg-secondary/60 p-4">
+      <div class="flex items-center justify-between">
+        <div>
+          <p class="text-xs text-muted-foreground">Current leader bid</p>
+          <p class="text-sm font-semibold">$12 · QOK.ai</p>
+        </div>
+        <div class="text-right">
+          <p class="text-xs text-muted-foreground">Your bid</p>
+          <p class="text-lg font-bold text-primary" id="dialog-price">$17</p>
+        </div>
+      </div>
+      <div class="mt-4 grid gap-2">
+        <label class="text-xs font-medium">Product URL</label>
+        <input id="dialog-url" type="url" placeholder="https://yourproduct.com" class="h-10 rounded-xl border border-border bg-white px-3 text-sm dark:bg-card"/>
+        <label class="text-xs font-medium">Category</label>
+        <select id="dialog-category" class="h-10 rounded-xl border border-border bg-white px-3 text-sm dark:bg-card">
+          <option>AI Media</option><option>Marketing</option><option>Agents</option><option>Productivity</option><option>Other</option>
+        </select>
+      </div>
+    </div>
+    <div class="mt-4 flex gap-2">
+      <button type="submit" value="cancel" class="flex-1 rounded-full border border-border bg-white py-3 text-sm font-medium hover:bg-muted dark:bg-card">Cancel</button>
+      <button id="confirm-bid" type="button" class="flex-1 rounded-full bg-primary py-3 text-sm font-semibold text-primary-foreground hover:bg-primary/90">Pay with Dodo Payments →</button>
+    </div>
+    <p class="mt-3 text-center text-xs text-muted-foreground">Whole-dollar bids only · Secure checkout by Dodo Payments</p>
+  </form>
+</dialog>
+
+<!-- toast -->
+<div id="toast" class="pointer-events-none fixed bottom-4 left-1/2 z-50 hidden -translate-x-1/2 rounded-full bg-foreground px-4 py-2 text-xs font-medium text-background shadow-xl">Link copied</div>
+
+<script src="./script.js" type="module"></script>
+</body>
+</html>

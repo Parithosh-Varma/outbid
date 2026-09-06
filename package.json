@@ -1,0 +1,13 @@
+{
+  "name": "outbid-ox-clone",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "1:1 clone of ox.lol — Where bold products compete for the spotlight",
+  "scripts": {
+    "dev": "python3 -m http.server 8787 --directory .",
+    "serve": "python3 -m http.server 8787 --directory .",
+    "preview": "python3 -m http.server 8787 --directory ."
+  },
+  "keywords": ["ox.lol", "clone", "leaderboard"]
+}
