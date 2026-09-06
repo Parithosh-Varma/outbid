@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>OX Games — Free Browser Arcade Games You Can Play Instantly</title>
+<meta name="description" content="Fast, original browser games with the products people are building woven into the world."/>
+<meta name="theme-color" content="#f5f5ed"/>
+<link rel="icon" type="image/x-icon" href="/public/favicon.ico"/>
+<link rel="icon" type="image/svg+xml" href="/public/ox-mark.svg"/>
+<link rel="icon" type="image/png" sizes="32x32" href="/public/favicon-32x32.png"/>
+<link rel="icon" type="image/png" sizes="16x16" href="/public/favicon-16x16.png"/>
+<link rel="apple-touch-icon" sizes="180x180" href="/public/apple-touch-icon.png"/>
+<link rel="manifest" href="/public/manifest.json"/>
+<link rel="canonical" href="https://outbid-3zo.pages.dev/games"/>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/styles.css"/>
+<style>
+  /* fallback ensure Inter loads */
+  :root{ --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif; }
+  /* hide scrollbar for category pills like original */
+  .no-scrollbar::-webkit-scrollbar{display:none}
+  .no-scrollbar{ -ms-overflow-style:none; scrollbar-width:none }
+</style>
+<script>
+  (()=>{
+    try{
+      const s=localStorage.getItem('ox-theme');
+      const d=s==='dark'||(!s&&matchMedia('(prefers-color-scheme: dark)').matches);
+      document.documentElement.classList.toggle('dark',d);
+      document.documentElement.style.colorScheme=d?'dark':'light'
+    }catch{}
+  })()
+</script>
+</head>
+<body>
+<div class="site-shell min-h-svh overflow-x-hidden bg-background text-foreground">
+  <div class="ambient ambient-left" aria-hidden="true"></div>
+  <div class="ambient ambient-right" aria-hidden="true"></div>
+
+  <!-- Header -->
+  <header class="relative z-20 border-b border-black/5 bg-background/75 backdrop-blur-xl dark:border-white/10">
+    <div class="mx-auto flex h-16 max-w-7xl items-center gap-2 px-4 sm:gap-4 sm:px-6">
+      <a href="#top" class="group flex items-center gap-2.5">
+        <div class="logo-mark grid shrink-0 place-items-center bg-foreground text-background shadow-xl shadow-black/20 transition-transform duration-300 size-10" aria-hidden="true">
+          <svg viewBox="0 0 48 48" class="size-8" fill="none">
+            <circle cx="15" cy="30" r="8" stroke="currentColor" stroke-width="4"></circle>
+            <path d="M24 36 38 18M25 19 38 36" stroke="currentColor" stroke-width="4" stroke-linecap="round"></path>
+            <path d="M31 16h9v9" stroke="var(--primary)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"></path>
+            <circle cx="10" cy="13" r="2" fill="var(--primary)"></circle>
+            <circle cx="17" cy="11" r="2" fill="var(--primary)" opacity=".65"></circle>
+          </svg>
+        </div>
+        <span class="brand-wordmark" aria-label="ox.lol">
+          <span class="brand-ox" aria-hidden="true">ox</span>
+          <span class="brand-dot" aria-hidden="true"></span>
+          <span class="brand-lol" aria-hidden="true"><span>l</span><span class="brand-ring"></span><span>l</span></span>
+        </span>
+      </a>
+
+      <div class="flex items-center rounded-full border border-black/5 bg-white/55 p-1 shadow-sm dark:border-white/10 dark:bg-white/5">
+        <a href="/" aria-current="page" class="inline-flex h-6 items-center gap-1 rounded-full bg-primary px-2.5 text-xs font-medium text-primary-foreground"> <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 14.66V17a1 1 0 0 1-1 1 2 2 0 0 0-2 2v2"/><path d="M14 14.66V17a1 1 0 0 0 1 1 2 2 0 0 1 2 2v2"/><path d="M17.916 10H19.5A2.5 2.5 0 0 0 22 7.5V5a1 1 0 0 0-1-1h-3"/><path d="M4 22h16"/><path d="M6 9a6 6 0 0 0 12 0V3a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1z"/><path d="M6.084 10H4.5A2.5 2.5 0 0 1 2 7.5V5a1 1 0 0 1 1-1h3"/></svg> All-time</a>
+        <a href="#today" class="inline-flex h-6 items-center rounded-full px-2.5 text-xs font-medium hover:bg-muted">Today</a>
+      </div>
+
+      <nav class="ml-auto hidden items-center gap-6 text-sm text-muted-foreground md:flex">
+        <a href="#leaderboard" class="font-medium text-foreground">Leaderboard</a>
+        <a href="#categories" class="hover:text-foreground">Categories</a>
+        <a href="#calendar" class="hover:text-foreground">Calendar</a>
+        <a href="#games" class="hover:text-foreground">Games</a>
+        <a href="#about" class="hover:text-foreground">About</a>
+        <a href="#rules" class="hover:text-foreground">Rules</a>
+      </nav>
+
+      <button id="theme-toggle" type="button" aria-label="Switch to dark mode" title="Dark mode" class="ml-auto grid size-8 place-items-center rounded-full hover:bg-muted md:ml-0">
+        <svg class="lucide-moon size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401"/></svg>
+      </button>
+
+      <!-- mobile menu -->
+      <button id="mobile-menu-btn" class="grid size-8 place-items-center rounded-full border border-black/10 bg-white/60 dark:border-white/10 dark:bg-white/5 md:hidden">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+      </button>
+    </div>
+    <div id="mobile-nav" class="hidden border-t border-black/5 bg-background px-4 py-3 dark:border-white/10 md:hidden">
+      <nav class="flex flex-col gap-3 text-sm">
+        <a href="#leaderboard" class="font-medium">Leaderboard</a>
+        <a href="#categories" class="text-muted-foreground">Categories</a>
+        <a href="#calendar" class="text-muted-foreground">Calendar</a>
+        <a href="#games" class="text-muted-foreground">Games</a>
+        <a href="#about" class="text-muted-foreground">About</a>
+        <a href="#rules" class="text-muted-foreground">Rules</a>
+      </nav>
+    </div>
+  </header>
+
+  
+  <main id="top" class="relative z-10">
+    <section class="mx-auto max-w-7xl px-4 pt-12 pb-20 sm:px-6 sm:pt-16">
+      <div class="mx-auto max-w-4xl text-center">
+        <div class="mx-auto mb-4 inline-flex items-center gap-2 rounded-full border border-black/5 bg-white/60 px-4 py-1 text-xs font-semibold uppercase tracking-widest dark:border-white/10 dark:bg-white/5">The OX Arcade is open · Instant play · No install · Always free</div>
+        <h1 class="text-[clamp(2.8rem,6.5vw,6rem)] font-black tracking-[-0.06em] leading-[0.9]">OX<span class="text-primary">GAMES</span></h1>
+        <p class="mx-auto mt-4 max-w-2xl text-muted-foreground">Fast, original browser games with the products people are building woven into the world.</p>
+        <div class="mt-6 flex justify-center gap-3">
+          <a href="/#leaderboard" class="rounded-full bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground">Get your brand in the game →</a>
+          <a href="#arcade" class="rounded-full border bg-white px-6 py-3 text-sm font-semibold">Play now</a>
+        </div>
+      </div>
+
+      <div id="arcade" class="mx-auto mt-12 max-w-6xl">
+        <h2 class="text-2xl font-semibold tracking-[-0.04em]">Ready when you are. <span class="text-muted-foreground">New drops will land here.</span></h2>
+        <div class="mt-6 grid gap-6 md:grid-cols-2">
+          <a href="/games/number-rush" class="group overflow-hidden rounded-3xl border bg-white shadow-sm hover:shadow-md dark:bg-card">
+            <div class="aspect-[16/10] bg-gradient-to-br from-violet-500 via-indigo-500 to-blue-600 p-6 flex flex-col justify-between text-white">
+              <div class="flex items-center justify-between text-xs"><span class="rounded-full bg-white/20 px-3 py-1">42 7 +5</span><span>Playable now · Arcade · Endless</span></div>
+              <div><p class="text-xs font-bold tracking-widest opacity-80">Game 001</p><h3 class="text-2xl font-black">Number Rush</h3><p class="text-sm opacity-80">Collect smaller numbers, dodge the giants, and grow as far as you can.</p></div>
+            </div>
+            <div class="p-4 flex items-center justify-between"><span class="text-sm font-semibold">Play now →</span><span class="text-xs text-muted-foreground">Endless runner</span></div>
+          </a>
+          <a href="/games/ox-skyline" class="group overflow-hidden rounded-3xl border bg-white shadow-sm hover:shadow-md dark:bg-card">
+            <div class="aspect-[16/10] bg-gradient-to-br from-cyan-400 to-blue-600 p-6 flex flex-col justify-between text-white">
+              <div class="flex items-center justify-between text-xs"><span class="rounded-full bg-white/20 px-3 py-1">OXAIDEVMKT</span><span>Playable now · Precision · Stacking</span></div>
+              <div><p class="text-xs font-bold tracking-widest opacity-80">Game 002</p><h3 class="text-2xl font-black">OX Skyline</h3><p class="text-sm opacity-80">Drop live ranked products into a neon skyline.</p></div>
+            </div>
+            <div class="p-4 flex items-center justify-between"><span class="text-sm font-semibold">Build the skyline →</span><span class="text-xs text-muted-foreground">Stacking</span></div>
+          </a>
+          <a href="/games/ox-kart-rush" class="group overflow-hidden rounded-3xl border bg-white shadow-sm hover:shadow-md dark:bg-card">
+            <div class="aspect-[16/10] bg-gradient-to-br from-orange-400 to-red-500 p-6 flex flex-col justify-between text-white">
+              <div class="flex items-center justify-between text-xs"><span class="rounded-full bg-white/20 px-3 py-1">OX OX OX</span><span>Playable now · 3D · Kart racing</span></div>
+              <div><p class="text-xs font-bold tracking-widest opacity-80">Game 003</p><h3 class="text-2xl font-black">OX Kart Rush</h3><p class="text-sm opacity-80">Three laps, seven rivals and live ranked products.</p></div>
+            </div>
+            <div class="p-4 flex items-center justify-between"><span class="text-sm font-semibold">Start your engine →</span><span class="text-xs text-muted-foreground">Racing</span></div>
+          </a>
+          <a href="/games/ox-formula" class="group overflow-hidden rounded-3xl border bg-white shadow-sm hover:shadow-md dark:bg-card">
+            <div class="aspect-[16/10] bg-gradient-to-br from-zinc-800 to-zinc-900 p-6 flex flex-col justify-between text-white">
+              <div class="flex items-center justify-between text-xs"><span class="rounded-full bg-white/20 px-3 py-1">OX</span><span>New · Playable now · 3D · Open-wheel</span></div>
+              <div><p class="text-xs font-bold tracking-widest opacity-80">Game 004</p><h3 class="text-2xl font-black">OX Formula</h3><p class="text-sm opacity-80">Qualify, race and master a complete 24-round championship.</p></div>
+            </div>
+            <div class="p-4 flex items-center justify-between"><span class="text-sm font-semibold">Enter the paddock →</span><span class="text-xs text-muted-foreground">Racing</span></div>
+          </a>
+        </div>
+
+        <div class="mt-6 grid gap-6 md:grid-cols-3">
+          <a href="/games/ox-hoops" class="rounded-3xl bg-foreground p-6 text-background">
+            <p class="text-xs font-bold tracking-widest opacity-60">NEW / 5V5 BASKETBALL · PLAYER VS CPU</p>
+            <h3 class="mt-2 text-xl font-black">OX HOOPS.</h3>
+            <p class="text-sm opacity-70">Choose from ten original teams. Pass, shoot and dunk your way through a 3D basketball showdown at OX Arena.</p>
+            <p class="mt-4 text-sm font-semibold">Hit the court →</p>
+          </a>
+          <a href="/games/ox-silent-contract" class="rounded-3xl border bg-white p-6 dark:bg-card">
+            <p class="text-xs font-bold tracking-widest text-muted-foreground">NEW / GAME 006 · CINEMATIC SNIPER</p>
+            <h3 class="mt-2 text-xl font-black">SILENT CONTRACT</h3>
+            <p class="text-sm text-muted-foreground">Nine contracts. Nine locations. A different scene on every return.</p>
+            <p class="mt-4 text-sm font-semibold text-primary">Accept contract →</p>
+          </a>
+          <a href="/games/ox-vice-drive" class="rounded-3xl border bg-white p-6 dark:bg-card">
+            <p class="text-xs font-bold tracking-widest text-muted-foreground">NEW / ORIGINAL OPEN-CITY DRIVING</p>
+            <h3 class="mt-2 text-xl font-black">VICE DRIVE.</h3>
+            <p class="text-sm text-muted-foreground">Chase the sunset in Solara Bay. Free roam, timed deliveries and patrol pursuits.</p>
+            <p class="mt-4 text-sm font-semibold text-primary">Enter the city →</p>
+          </a>
+        </div>
+
+        <div class="mt-6 grid gap-6 md:grid-cols-2">
+          <a href="/games/ox-alpine-rush" class="overflow-hidden rounded-3xl border bg-white dark:bg-card">
+            <div class="h-48 bg-gradient-to-br from-sky-400 to-blue-600 grid place-items-center text-white font-black text-2xl">ALPINE RUSH</div>
+            <div class="p-6"><p class="text-xs font-bold tracking-widest text-muted-foreground">NEW / GAME 009 · 3D SNOWBOARDING</p><h3 class="text-xl font-black mt-1">ALPINE RUSH.</h3><p class="text-sm text-muted-foreground">Find your line through sunlit peaks, snow-covered forests and alpine villages.</p><p class="mt-4 text-sm font-semibold">Drop in →</p></div>
+          </a>
+          <a href="/games/ox-moon-miner" class="overflow-hidden rounded-3xl border bg-white dark:bg-card">
+            <div class="h-48 bg-gradient-to-br from-zinc-800 via-zinc-700 to-zinc-900 grid place-items-center text-white font-black text-2xl">MOON MINER</div>
+            <div class="p-6"><p class="text-xs font-bold tracking-widest text-muted-foreground">NEW / 3D LUNAR TREASURE EXPEDITION</p><h3 class="text-xl font-black mt-1">MOON MINER.</h3><p class="text-sm text-muted-foreground">Drive the lunar surface, drill four classes of treasure and chase an S-grade score.</p><p class="mt-4 text-sm font-semibold">Begin mission →</p></div>
+          </a>
+        </div>
+
+        <div class="mt-10 rounded-3xl bg-foreground p-8 text-background">
+          <h3 class="text-2xl font-bold">Rank higher. Appear more.</h3>
+          <p class="mt-2 text-sm opacity-70">Products with higher OX rankings are selected more often for trackside billboards and branded drops inside the game.</p>
+          <a href="/" class="mt-4 inline-flex rounded-full bg-primary px-5 py-2 text-sm font-semibold text-primary-foreground">Climb the OX leaderboard →</a>
+          <div class="mt-6 grid gap-3 sm:grid-cols-3 text-foreground">
+            <div class="rounded-2xl bg-white p-4 text-foreground"><p class="text-xs font-bold tracking-widest">#1</p><p class="font-semibold">Global AI News & Intelligence · QOK.ai</p><p class="text-xs text-muted-foreground">Highest appearance frequency</p></div>
+            <div class="rounded-2xl bg-white p-4 text-foreground"><p class="text-xs font-bold tracking-widest">#2</p><p class="font-semibold">AdsPals | Rent their reach</p><p class="text-xs text-muted-foreground">High appearance frequency</p></div>
+            <div class="rounded-2xl bg-white p-4 text-foreground"><p class="text-xs font-bold tracking-widest">#3</p><p class="font-semibold">Lolrouter</p><p class="text-xs text-muted-foreground">Frequent in-game appearances</p></div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+
+  <footer id="about" class="relative z-10 border-t border-black/5 bg-white/35 dark:border-white/10 dark:bg-white/3">
+    <div class="mx-auto flex max-w-7xl flex-col gap-5 px-4 py-8 text-sm text-muted-foreground sm:px-6 md:flex-row md:items-center">
+      <div class="flex items-center gap-2 font-semibold text-foreground">
+        <div class="logo-mark grid shrink-0 place-items-center bg-foreground text-background shadow-xl shadow-black/20 size-7" aria-hidden="true">
+          <svg viewBox="0 0 48 48" class="size-5" fill="none">
+            <circle cx="15" cy="30" r="8" stroke="currentColor" stroke-width="4"></circle>
+            <path d="M24 36 38 18M25 19 38 36" stroke="currentColor" stroke-width="4" stroke-linecap="round"></path>
+            <path d="M31 16h9v9" stroke="var(--primary)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"></path>
+            <circle cx="10" cy="13" r="2" fill="var(--primary)"></circle>
+            <circle cx="17" cy="11" r="2" fill="var(--primary)" opacity=".65"></circle>
+          </svg>
+        </div>
+        <span class="brand-wordmark brand-wordmark-compact" aria-label="ox.lol"><span class="brand-ox">ox</span><span class="brand-dot"></span><span class="brand-lol"><span>l</span><span class="brand-ring"></span><span>l</span></span></span>
+      </div>
+      <p class="md:ml-4">Built something great? Put it on the board.</p>
+      <nav class="flex flex-wrap gap-5 md:ml-auto">
+        <a href="#" class="hover:text-foreground">China Rank</a>
+        <a href="#" class="hover:text-foreground">Games</a>
+        <a href="#" class="hover:text-foreground">Privacy</a>
+        <a href="https://x.com/qok_ai" target="_blank" class="flex items-center gap-1 hover:text-foreground">X / Twitter <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6"/><path d="M10 14 21 3"/><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/></svg></a>
+        <a href="#" class="hover:text-foreground">Terms</a>
+        <a href="#" class="hover:text-foreground">Rules</a>
+      </nav>
+    </div>
+  </footer>
+</div>
+
+<!-- Bid dialog -->
+<dialog id="bid-dialog" class="m-0 max-h-none max-w-none w-full max-w-[560px] overflow-visible rounded-3xl bg-transparent p-4 backdrop:bg-black/60 open:grid place-items-center inset-0 mx-auto my-auto">
+  <form method="dialog" class="w-full rounded-3xl bg-card p-6 shadow-2xl">
+    <div class="mb-4 flex items-start justify-between">
+      <div>
+        <p class="text-xs font-bold tracking-widest text-primary uppercase">Secure checkout</p>
+        <h3 class="mt-1 text-xl font-semibold">Claim your spot</h3>
+        <p class="mt-1 text-sm text-muted-foreground" id="dialog-subtitle">You're about to claim #1 for $17 and take the crown.</p>
+      </div>
+      <button type="submit" value="cancel" class="grid size-8 place-items-center rounded-full hover:bg-muted"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
+    </div>
+    <div class="rounded-2xl bg-secondary/60 p-4">
+      <div class="flex items-center justify-between">
+        <div>
+          <p class="text-xs text-muted-foreground">Current leader bid</p>
+          <p class="text-sm font-semibold">$12 · QOK.ai</p>
+        </div>
+        <div class="text-right">
+          <p class="text-xs text-muted-foreground">Your bid</p>
+          <p class="text-lg font-bold text-primary" id="dialog-price">$17</p>
+        </div>
+      </div>
+      <div class="mt-4 grid gap-2">
+        <label class="text-xs font-medium">Product URL</label>
+        <input id="dialog-url" type="url" placeholder="https://yourproduct.com" class="h-10 rounded-xl border border-border bg-white px-3 text-sm dark:bg-card"/>
+        <label class="text-xs font-medium">Category</label>
+        <select id="dialog-category" class="h-10 rounded-xl border border-border bg-white px-3 text-sm dark:bg-card">
+          <option>AI Media</option><option>Marketing</option><option>Agents</option><option>Productivity</option><option>Other</option>
+        </select>
+      </div>
+    </div>
+    <div class="mt-4 flex gap-2">
+      <button type="submit" value="cancel" class="flex-1 rounded-full border border-border bg-white py-3 text-sm font-medium hover:bg-muted dark:bg-card">Cancel</button>
+      <button id="confirm-bid" type="button" class="flex-1 rounded-full bg-primary py-3 text-sm font-semibold text-primary-foreground hover:bg-primary/90">Pay with Dodo Payments →</button>
+    </div>
+    <p class="mt-3 text-center text-xs text-muted-foreground">Whole-dollar bids only · Secure checkout by Dodo Payments</p>
+  </form>
+</dialog>
+
+<!-- toast -->
+<div id="toast" class="pointer-events-none fixed bottom-4 left-1/2 z-50 hidden -translate-x-1/2 rounded-full bg-foreground px-4 py-2 text-xs font-medium text-background shadow-xl">Link copied</div>
+
+<script src="/script.js" type="module"></script>
+</body>
+</html>
+<!-- reverted 1788672755 -->
