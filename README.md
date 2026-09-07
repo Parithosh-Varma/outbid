@@ -33,3 +33,5 @@ Open http://localhost:8787
 
 - CSS is vendored directly from ox.lol to guarantee exact tokens (`--background`, `--primary` oklch, `.site-shell` grid, `.rank-one` shadows, etc.)
 - Fonts: Inter via Google Fonts (original uses `Inter Variable`)
+
+<!-- daily-2026-09-07: upkeep -->
